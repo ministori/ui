@@ -8,7 +8,6 @@ var livereload = require('gulp-livereload');
 var include = require('gulp-include');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
-var convertEncoding = require('gulp-convert-encoding');
 
 /**
  * task 정의 영역
