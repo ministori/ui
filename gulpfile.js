@@ -8,6 +8,7 @@ var livereload = require('gulp-livereload');
 var include = require('gulp-include');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
+var convertEncoding = require('gulp-convert-encoding');
 
 /**
  * task 정의 영역
@@ -22,7 +23,7 @@ gulp.task('check', function() {
 gulp.task('watch', function() {
     livereload.listen();
     gulp.watch('*', ['check']);
-    gulp.watch('js_src/**', ['copy', 'check']);
+    gulp.watch('js_src/**', ['concat', 'copy', 'check']);
     gulp.watch('css_scss/**', ['sass', 'check']);
     gulp.watch('html_src/**', ['include', 'check']);
 });
@@ -65,7 +66,6 @@ gulp.task('copy', function () {
     return gulp.src('js_src/lib/**')
         .pipe(gulp.dest('js/lib/'));
 });
-
 
 
 /**
