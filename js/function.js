@@ -202,6 +202,237 @@ $(function(){
 
 
 
+// ¾ÆÄÚµð¾ð ¸Þ´º Å¸ÀÔ 2
+
+$(function(){
+
+    function menuAnimateInit(){
+        $('.animate-1depth-link').data({'open' : 'false'});
+
+        $('.animate-2depth').each(function(index){
+
+            $(this).data({
+                'height' : $(this).height()
+            }).css({
+                height : 0
+            });
+
+        });
+    }
+
+    function menuAnimateOn( $depth1 ){
+        $depth1.parent('.acc-1depth-item').siblings().children('.animate-2depth').stop().animate({
+            height : 0
+        });
+        $depth1.parent('.acc-1depth-item').siblings().children('.animate-1depth-link').data({'open' : 'false'});
+        $depth1.next('.animate-2depth').stop().animate({
+            height : $depth1.next('.animate-2depth').data('height')
+        });
+    }
+
+    function menuAnimateOff( $depth1 ){
+        $depth1.next('.animate-2depth').stop().animate({
+            height : 0
+        });
+    }
+
+    function menuArrowAnimateOn( $depth1 ){
+        $depth1.parent('.acc-1depth-item').siblings().children('.animate-1depth-link').removeClass('on').data({'open' : 'false'});
+        $depth1.addClass('on');
+    }
+
+    function menuArrowAnimateOff( $depth1 ){
+        $depth1.removeClass('on');
+    }
+
+    // ÃÊ±âÈ­ ÇÔ¼ö ½ÇÇà
+    menuAnimateInit();
+
+    // 1µª½º ¸Þ´º Å¬¸¯½Ã µ¿ÀÛ ½ÇÇà
+    $('.animate-1depth-link').on('click', function(){
+
+        if( $(this).data('open') == 'false' ){
+            // ¿­±â
+            menuArrowAnimateOn( $(this) );
+            menuAnimateOn( $(this) );
+
+            $(this).data({'open' : 'true'});
+
+        } else {
+            // ´Ý±â
+            menuArrowAnimateOff( $(this) );
+            menuAnimateOff( $(this) );
+
+            $(this).data({'open' : 'false'});
+        }
+
+
+    });
+
+});
+/**
+ *
+ * 1. ì´ë²¤íŠ¸( ì´ë²¤íŠ¸ ëŒ€ìƒ )
+ *
+ *    - íŽ˜ì´ì§€ : ë¡œë”© / ë²„íŠ¼ : í´ë¦­
+ *
+ * 2. ê¸°ëŠ¥ - í•¨ìˆ˜
+ *
+ *    - ì´ë¯¸ì§€ ì˜¤ë¥¸ìª½->ì™¼ìª½ìœ¼ë¡œ ìŠ¬ë¼ì´ë”©( ë‹¤ìŒê²ƒ ë³´ì—¬ì¤Œ )
+ *
+ *    - ì´ë¯¸ì§€ ì™¼ìª½->ì˜¤ë¥¸ìª½ìœ¼ë¡œ ìŠ¬ë¼ì´ë”©( ì´ì „ê²ƒ ë³´ì—¬ì¤Œ )
+ *
+ *    - ì´ë¯¸ì§€ ë°°ì¹˜, ì¸ë±ìŠ¤ ë²ˆí˜¸ ì´ˆê¸°í™”
+ *
+ */
+
+$(function(){
+
+    var currentIndex = 0; // í™”ë©´ ì•ˆì—ì„œ ë°”ê¹¥ìœ¼ë¡œ ë‚˜ê°€ëŠ” ì´ë¯¸ì§€ ì¸ë±ìŠ¤ ë³€ìˆ˜
+    var index = 0; // í™”ë©´ ë°”ê¹¥ì—ì„œ ì•ˆìœ¼ë¡œ ë“¤ì–´ì˜¤ëŠ” ì´ë¯¸ì§€ ì¸ë±ìŠ¤ ë³€ìˆ˜
+    var visualLength = 0; // ì´ë¯¸ì§€ì˜ ê°œìˆ˜ ì €ìž¥ ë³€ìˆ˜
+    var $visual = $('.js-ani');
+
+
+    // ì´ˆê¸°í™” í•¨ìˆ˜ ì •ì˜
+    function rollingInit(){
+
+        currentIndex = 0;
+        visualLength = $visual.length;
+
+        $visual.css({
+            left : 900
+        }).eq(0).css({
+            left : 0
+        });
+
+    }
+
+    // ì´ë¯¸ì§€ ì´ë™( ì˜¤ë¥¸ìª½ -> ì™¼ìª½ )
+    function moveLeft(){
+        if( index >= visualLength ){ index = 0; }
+
+        $visual.eq(currentIndex).stop().animate({left : -900}, 1000);
+        $visual.eq(index).css({left : 900}).stop().animate({left : 0}, 1000);
+
+        currentIndex = index;
+        index++;
+
+    }
+
+    // ì´ë¯¸ì§€ ì´ë™( ì™¼ìª½ -> ì˜¤ë¥¸ìª½ )
+    function moveRight(){
+        if( index <= -1 ){ index = visualLength-1; }
+
+        $visual.eq(currentIndex).stop().animate({left : 900}, 1000);
+        $visual.eq(index).css({left : -900}).stop().animate({left : 0}, 1000);
+
+        currentIndex = index;
+        index--;
+    }
+
+    // load : ì´ë¯¸ì§€ê°€ ë¡œë”© ì™„ë£Œëœí›„ ë°œìƒë˜ëŠ” ì´ë²¤íŠ¸
+    // HTML DOM Element : ë¬¸ìž ë°ì´í„°
+    $(document).on('load', function(){
+    });
+
+    // ì´ˆê¸°í™” í•¨ìˆ˜ ì‹¤í–‰
+    rollingInit();
+
+    $('.arrow-btn.next').on('click', function(){
+        index = currentIndex + 1;
+
+        if( !$('.js-ani').is(':animated') ){
+            moveLeft();
+        }
+
+    });
+
+    $('.arrow-btn.prev').on('click', function(){
+        index = currentIndex - 1;
+
+        if( !$('.js-ani').is(':animated') ){
+            moveRight();
+        }
+
+    });
+
+
+});
+/**
+ *
+ * 1. ì´ë²¤íŠ¸( ì´ë²¤íŠ¸ ëŒ€ìƒ )
+ *
+ *    - íŽ˜ì´ì§€ : ë¡œë”© / ë²„íŠ¼ : í´ë¦­
+ *
+ * 2. ê¸°ëŠ¥ - í•¨ìˆ˜
+ *
+ *    - ì´ë¯¸ì§€ íŽ˜ì´ë“œ ì¸-ì•„ì›ƒ( ì´ì „ê²ƒ, ë‹¤ìŒê²ƒ ë³´ì—¬ì¤Œ )
+ *
+ *    - ì´ë¯¸ì§€ ë°°ì¹˜, ì¸ë±ìŠ¤ ë²ˆí˜¸ ì´ˆê¸°í™”
+ *
+ */
+
+$(function(){
+
+    var currentIndex = 0; // ë³´ì´ëŠ” ìƒíƒœì—ì„œ ì‚¬ë¼ì§€ëŠ” ì´ë¯¸ì§€ ì¸ë±ìŠ¤ ë³€ìˆ˜
+    var index = 0; // ì•ˆë³´ì¸ëŠ” ìƒíƒœì—ì„œ ë‚˜íƒ€ë‚˜ëŠ” ì´ë¯¸ì§€ ì¸ë±ìŠ¤ ë³€ìˆ˜
+    var visualLength = 0; // ì´ë¯¸ì§€ì˜ ê°œìˆ˜ ì €ìž¥ ë³€ìˆ˜
+    var $visual = $('.js-fade');
+
+    // ì´ˆê¸°í™” í•¨ìˆ˜ ì •ì˜
+    function fadeInit(){
+
+        currentIndex = 0;
+        visualLength = $visual.length;
+
+        $visual.hide().eq(0).show();
+
+    }
+
+    function fadeNext(){
+        if( index >= visualLength ){ index = 0; }
+
+        $visual.eq(currentIndex).stop().fadeOut();
+        $visual.eq(index).stop().fadeIn();
+
+        currentIndex = index;
+        index++;
+    }
+
+    function fadePrev(){
+        if( index <= -1 ){ index = visualLength-1; }
+
+        $visual.eq(currentIndex).stop().fadeOut();
+        $visual.eq(index).fadeIn();
+
+        currentIndex = index;
+        index--;
+    }
+
+    // ì´ˆê¸°í™” í•¨ìˆ˜ ì‹¤í–‰
+    fadeInit();
+
+    $('.js-fade-btn.next').on('click', function(){
+        index = currentIndex + 1;
+
+        if( !$('.visual').is(':animated') ){
+            fadeNext();
+        }
+
+    });
+
+    $('.js-fade-btn.prev').on('click', function(){
+        index = currentIndex - 1;
+
+        if( !$('.visual').is(':animated') ){
+            fadePrev();
+        }
+
+    });
+
+
+});
 $(function(){
 
     function tabSelect( $allTab, $thisTab, $tabContent ){
@@ -233,3 +464,162 @@ $(function(){
 
 
 
+
+/**
+ *
+ * 1. ÀÌº¥Æ®
+ *
+ * 2. ±â´É - ÇÔ¼ö
+ *
+ */
+
+$(function(){
+
+    // on Å¬·¡½º Ãß°¡ - tab, tab-content
+    function tabOn( $tab, index ){
+
+        $tab.siblings().removeClass('on');
+        $tab.addClass('on');
+
+        var $tabContent = $('.tab-content').eq(index);
+
+        $tabContent.siblings().removeClass('on');
+        $tabContent.addClass('on');
+
+    }
+
+    $('.tab-menu-list').on('click', function(){
+
+        var index = $(this).index('.tab-menu-list');
+
+        tabOn( $(this), index );
+
+    });
+
+});
+
+/**
+ *
+ * 1. ÀÌº¥Æ®
+ *
+ * 2. ±â´É - ÇÔ¼ö
+ *
+ */
+
+$(function(){
+
+    // on Å¬·¡½º Ãß°¡ - tab, tab-content
+    function tabOn( $tab, index ){
+
+        $tab.siblings('.tab-heading').removeClass('on');
+        $tab.addClass('on');
+
+        var $tabContent = $('.tab-paragraph').eq(index);
+
+        $tabContent.siblings('.tab-paragraph').removeClass('on');
+        $tabContent.addClass('on');
+
+    }
+
+    $('.tab-heading').on('click', function(){
+
+        var index = $(this).index('.tab-heading');
+
+        tabOn( $(this), index );
+
+    });
+
+});
+
+/**
+ *
+ * javascript coding ´Ü°è
+ *
+ * 1. 2°³ÀÇ Ä«Å×°í¸® »ý°¢
+ *
+ *  1) ÀÌº¥Æ®
+ *
+ *  2) ±â´É - ÇÔ¼ö
+ *
+ */
+
+$(function(){
+
+    /**
+     * ÇÊ¿äÇÑ ±â´É - ÃÊ±âÈ­ ±â´É, ¼­ºê¸Þ´º¸¦ º¸¿©ÁÖ´Â ±â´É, ¼­ºê¸Þ´º¸¦ ¼û±â´Â ±â´É, È­»ìÇ¥¸¦ ¿À¸¥ÂÊÀ¸·Î º¸°ÔÇÏ´Â ±â´É, È­»ìÇ¥¸¦ ¾Æ·¡·Î º¸°ÔÇÏ´Â ±â´É
+     *
+     */
+
+    // ÃÊ±âÈ­ ÇÔ¼ö
+    function menuTransInit(){
+        $('.transition-1depth-link').data({'open' : 'false'});
+
+        $('.acc-2depth-transition').each(function(index){
+
+            $(this)
+                .data({'height' : $(this).height()})
+                .css({height:0});
+        });
+    }
+
+    // ¼­ºê¸Þ´º º¸¿©ÁÖ´Â ÇÔ¼ö
+    function menuTransOn( $depth1 ){
+        // $(this) => depth1
+
+        var $currentSiblingsChildrenSub = $depth1.parent().siblings().children('.acc-2depth-transition');
+        var $currentNextSub = $depth1.next('.acc-2depth-transition');
+
+        $currentSiblingsChildrenSub.css({height : 0});
+        $currentNextSub.css({height : $currentNextSub.data('height')});
+    }
+
+    // ¼­ºê¸Þ´º ¼û±â´Â ÇÔ¼ö
+    function menuTransOff( $depth1 ){
+
+        var $currentNextSub = $depth1.next('.acc-2depth-transition');
+
+        $currentNextSub.css({height : 0});
+    }
+
+    // È­»ìÇ¥ ¾Æ·¡·Î º¸°ÔÇÏ´Â ÇÔ¼ö
+    function arrowTransOn( $depth1 ){
+
+        var $currentSiblingsChildrenAnchor = $depth1.parent().siblings().children('.transition-1depth-link');
+
+        $currentSiblingsChildrenAnchor.removeClass('on');
+        $depth1.addClass('on');
+    }
+
+    // È­»ìÇ¥ ¿À¸¥ÂÊ º¸°ÔÇÏ´Â ÇÔ¼ö
+    function arrowTransOff( $depth1 ){
+        $depth1.removeClass('on');
+    }
+
+    // ÃÊ±âÈ­ ÇÔ¼ö ½ÇÇà
+    menuTransInit();
+
+    $('.transition-1depth-link').on('click', function(e){
+        // Å¬¸¯ÇßÀ» ¶§ ½ÇÇà
+
+        e.preventDefault();
+
+        if( $(this).data('open') == 'false' ){
+
+            menuTransOn( $(this) );
+            arrowTransOn( $(this) );
+
+            $(this).data({'open' : 'true'});
+
+        } else {
+
+            menuTransOff( $(this) );
+            arrowTransOff( $(this) );
+
+            $(this).data({'open' : 'false'});
+
+        }
+
+
+    });
+
+});

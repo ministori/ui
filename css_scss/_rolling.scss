@@ -1,0 +1,45 @@
+.rolling{
+  width:900px;
+  height:500px;
+  position:relative;
+}
+
+.stage{
+  position:relative;
+  width:900px;
+  height:500px;
+  overflow:hidden;
+}
+
+.visual{
+
+  position:absolute;
+  top:0;
+
+  img{
+    display:block;
+  }
+
+}
+
+.arrow{
+  &-btn{
+    position:absolute;
+    top:50%;
+    width: 32px;
+    height: 32px;
+    margin-top:-16px;
+    text-indent: -9999px;
+    z-index: 9999;
+    cursor: pointer;
+    border:0;
+    background:url(../images/controls.png) no-repeat;
+    &.prev{
+      left:10px;
+    }
+    &.next{
+      right:10px;
+      background-position:-43px 0;
+    }
+  }
+}

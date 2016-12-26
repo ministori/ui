@@ -30,6 +30,10 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   line-height: 1;
 }
@@ -58,211 +62,75 @@ a {
   color: #333;
 }
 
-html {
-  overflow-y: scroll;
-}
-
 /* 헤더 영역 */
 .header {
-  width: 100%;
   height: 100px;
-  background: #0fd;
-  margin: 0 auto 50px;
-  text-align: center;
 }
 
-.header:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-/* 로고 영역 */
 .logo {
-  font-size: 30px;
-  text-align: center;
+  height: 100px;
   line-height: 100px;
+  background: lightskyblue;
+  text-align: center;
 }
 
 .logo-link {
-  display: block;
-  height: 100%;
+  font-size: 30px;
+  color: #fff;
 }
 
-/* 메뉴 영역 */
-.gnb {
-  float: right;
-  height: 100px;
-}
-
-.gnb-depth1:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-.gnb-depth1-item {
-  float: left;
-  padding: 0 50px;
-}
-
-.gnb-depth1-link {
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-}
-
-.gnb-depth1-link:hover {
-  color: #f00;
-}
-
-/* 푸터 영역 */
-.footer {
-  width: 100%;
-  height: 100px;
-  line-height: 100px;
-  text-align: center;
-  border-top: 1px solid #ccc;
-  background: #dedede;
-  margin-top: 50px;
-}
-
-.footer-address {
-  text-align: center;
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-}
-
+/* 제목 영역 */
 .section-heading {
   font-size: 20px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid red;
+  font-weight: bold;
+  padding-bottom: 10px;
+  border-bottom: 1px solid red;
+  margin-top: 30px;
 }
 
 .section-heading-sub {
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: bold;
   margin: 30px 0;
 }
 
-.tab-section {
+/* 섹션 레이아웃 영역 */
+.accordion-section,
+.tab-section,
+.rolling-section {
   width: 900px;
-  margin: 0 auto;
+  margin: 0 auto 50px;
 }
 
-.tab-menu:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-.tab-menu-list {
-  float: left;
-  padding: 20px;
-  border: 1px solid #999;
-  border-bottom: 0;
-  cursor: pointer;
-}
-
-.tab-menu-list.on {
-  background: #ddd;
-}
-
-.tab-content {
-  display: none;
-  height: 300px;
-  border: 1px solid #999;
-  padding: 20px;
-  line-height: 1.6;
-}
-
-.tab-content.on {
-  display: block;
-}
-
-.tab-area {
-  width: 900px;
-  position: relative;
-  padding-top: 57px;
-}
-
-.tab-heading {
-  width: 85px;
-  position: absolute;
-  top: 0;
-  padding: 20px 0;
-  border: 1px solid #999;
-  border-bottom: 0;
-  cursor: pointer;
-  text-align: center;
-}
-
-.tab-heading.on {
-  background: #ddd;
-}
-
-.tab-heading:nth-child(3) {
-  left: 85px;
-}
-
-.tab-heading:nth-child(5) {
-  left: 170px;
-}
-
-.tab-paragraph {
-  display: none;
-  height: 300px;
-  border: 1px solid #999;
-  padding: 20px;
-  line-height: 1.6;
-}
-
-.tab-paragraph.on {
-  display: block;
-}
-
-.accordion-section {
-  width: 900px;
-  margin: 0 auto;
-}
-
-.acc-menu {
+.acc-1depth {
   width: 200px;
-  margin-top: 50px;
-  border: 1px solid #666;
-}
-
-.acc-1depth-link:before {
-  content: "-";
-  display: inline-block;
-  width: 13px;
-  height: 18px;
-  text-align: center;
-  margin-right: 5px;
-  border: 1px solid #333;
-  line-height: 16px;
-}
-
-.acc-1depth-link.fold:before {
-  content: "+";
+  border: 1px solid #ccc;
 }
 
 .acc-1depth-item {
-  padding: 10px;
-  border-top: 1px solid #666;
+  border-top: 1px solid #ccc;
+  padding: 10px 0 10px 10px;
+}
+
+.acc-1depth-item:first-child {
+  border-top: 0;
+}
+
+.acc-1depth-link {
+  display: block;
+}
+
+.acc-1depth-link:before {
+  content: "\25B6";
+  display: inline-block;
+}
+
+.acc-1depth-display.on:before {
+  content: "\25BC";
 }
 
 .acc-2depth {
-  margin: 0 0 0 35px;
-  overflow: hidden;
-}
-
-.acc-2depth-item {
-  margin: 20px 0;
-}
-
-.acc-2depth-item:last-child {
-  margin-bottom: 0;
+  padding-left: 20px;
 }
 
 .acc-2depth-display {
@@ -273,6 +141,154 @@ html {
   display: block;
 }
 
+.acc-2depth-item {
+  margin-top: 20px;
+}
+
+.animate-1depth-link.on:before {
+  content: "\25BC";
+}
+
+.animate-2depth {
+  overflow: hidden;
+}
+
 .acc-2depth-transition {
-  transition: height 1s cubic-bezier(0.19, 1.28, 0.76, -0.33);
+  overflow: hidden;
+  transition: height 1s ease-out;
+}
+
+.transition-1depth-link:before {
+  transition: transform 1s ease-out;
+}
+
+.transition-1depth-link.on:before {
+  transform: rotate(90deg);
+}
+
+.tab-menu:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.tab-menu-list {
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 10px;
+  border: 1px solid #ddd;
+}
+
+.tab-menu-list.on {
+  background: red;
+  color: #fff;
+}
+
+.tab-content {
+  height: 230px;
+  padding: 30px 30px 0 30px;
+  border: 1px solid #ddd;
+  display: none;
+}
+
+.tab-content.on {
+  display: block;
+}
+
+.tab-area {
+  position: relative;
+  padding-top: 52px;
+}
+
+.tab-heading {
+  position: absolute;
+  top: 0;
+  width: 85px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 10px;
+  border: 1px solid #ddd;
+}
+
+.tab-heading.tab1 {
+  left: 0;
+}
+
+.tab-heading.tab2 {
+  left: 105px;
+}
+
+.tab-heading.tab3 {
+  left: 210px;
+}
+
+.tab-heading.on {
+  background: red;
+  color: #fff;
+}
+
+.tab-paragraph {
+  display: none;
+  height: 230px;
+  padding: 30px 30px 0 30px;
+  border: 1px solid #ddd;
+}
+
+.tab-paragraph.on {
+  display: block;
+}
+
+.rolling {
+  width: 900px;
+  height: 500px;
+  position: relative;
+}
+
+.stage {
+  position: relative;
+  width: 900px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.visual {
+  position: absolute;
+  top: 0;
+}
+
+.visual img {
+  display: block;
+}
+
+.arrow-btn {
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  height: 32px;
+  margin-top: -16px;
+  text-indent: -9999px;
+  z-index: 9999;
+  cursor: pointer;
+  border: 0;
+  background: url(../images/controls.png) no-repeat;
+}
+
+.arrow-btn.prev {
+  left: 10px;
+}
+
+.arrow-btn.next {
+  right: 10px;
+  background-position: -43px 0;
+}
+
+/* 푸터 영역 */
+.footer {
+  height: 50px;
+  background: #666;
+  font-size: 20px;
+  text-align: center;
+  color: #fafafa;
+  line-height: 50px;
 }
