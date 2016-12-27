@@ -283,6 +283,18 @@ a {
   background-position: -43px 0;
 }
 
+.control {
+  position: absolute;
+}
+
+.pagination-button {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 10px;
+}
+
 /* 푸터 영역 */
 .footer {
   height: 50px;

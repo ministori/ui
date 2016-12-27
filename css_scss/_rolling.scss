@@ -43,3 +43,24 @@
     }
   }
 }
+
+.control{
+  position:absolute;
+}
+
+.pagination{
+
+  &-item{
+
+  }
+
+  &-button{
+    display:block;
+    width:20px;
+    height:20px;
+
+    background:#fff;
+    border-radius:10px;
+  }
+
+}
