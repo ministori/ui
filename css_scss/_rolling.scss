@@ -46,21 +46,66 @@
 
 .control{
   position:absolute;
+  left:50%;
+  bottom:40px;
+  margin-left:-54px;
+
+  &:after{
+    content:"";
+    display:block;
+    clear:both;
+  }
 }
 
 .pagination{
+  float:left;
+
+  &:after{
+    content:"";
+    display:block;
+    clear:both;
+  }
 
   &-item{
-
+    float:left;
+    margin-right:5px;
   }
 
   &-button{
     display:block;
-    width:20px;
-    height:20px;
+    width:11px;
+    height:11px;
 
     background:#fff;
+    border:0;
     border-radius:10px;
+    text-indent:-99999em;
+
+    cursor:pointer;
+
+    &.on{
+      background:#ccc;
+    }
+  }
+
+}
+
+.play-control-btn{
+  float:left;
+  display:block;
+  width:10px;
+  height:11px;
+
+  border:0;
+  background:url(../images/controls.png) no-repeat -86px -44px;
+  text-indent:-9999em;
+
+  margin-left:10px;
+
+  cursor:pointer;
+
+  &.play{
+    background-position:-86px -11px;
   }
 
 }
